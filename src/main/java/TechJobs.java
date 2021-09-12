@@ -30,7 +30,7 @@ public class TechJobs {
         // Allow the user to search until they manually quit
         while (true) {
 
-            String actionChoice = getUserSelection("View jobs by:", actionChoices);
+            String actionChoice = getUserSelection("View jobs by (type 'x' to quit):", actionChoices);
 
             if (actionChoice == null) {
                 break;
@@ -70,7 +70,7 @@ public class TechJobs {
         }
     }
 
-    // Returns the key of the selected item from the choices Dictionary
+    // ﻿Returns the key of the selected item from the choices Dictionary
     private static String getUserSelection(String menuHeader, HashMap<String, String> choices) {
 
         int choiceIdx = -1;
@@ -90,12 +90,20 @@ public class TechJobs {
             System.out.println("\n" + menuHeader);
 
             // Print available choices
-            for (Integer j = 0; j < choiceKeys.length; j++) {
+            for (int j = 0; j < choiceKeys.length; j++) {
                 System.out.println("" + j + " - " + choices.get(choiceKeys[j]));
             }
 
-            choiceIdx = in.nextInt();
-            in.nextLine();
+            if (in.hasNextInt()) {
+                choiceIdx = in.nextInt();
+                in.nextLine();
+            } else {
+                String line = in.nextLine();
+                boolean shouldQuit = line.equals("x");
+                if (shouldQuit) {
+                    return null;
+                }
+            }
 
             // Validate user's input
             if (choiceIdx < 0 || choiceIdx >= choiceKeys.length) {
@@ -111,18 +119,7 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
-        if (someJobs.isEmpty()) {
-            System.out.println("No matching results");
-        }else{
-            for (HashMap<String, String> entry : someJobs) {
-                System.out.println("*****");
-                for (String key : entry.keySet()) {
-                    String value = entry.get(key);
-                    System.out.println(key + ": " + value);
 
-                }
-
-            }
-        }
+        System.out.println("printJobs is not implemented yet");
     }
 }
