@@ -121,7 +121,7 @@ public class TechJobs {
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
         if (someJobs.isEmpty()) {
-            System.out.print("No Results. Try Again.");
+            System.out.println("No Results. Try Again.");
         } else {
             for (HashMap<String, String> job: someJobs) {
                 System.out.println("\n*****");

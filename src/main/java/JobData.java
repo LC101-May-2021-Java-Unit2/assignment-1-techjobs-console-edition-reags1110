@@ -8,6 +8,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 /**
@@ -79,7 +80,7 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toLowerCase().contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
@@ -98,8 +99,17 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        return null;
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        if (!value.equals("")) {
+            for (HashMap<String, String> job : allJobs) {
+                for (Map.Entry<String, String> detail : job.entrySet())
+                    if (detail.getValue().toLowerCase().contains(value.toLowerCase())) {
+                        jobs.add(job);
+                        break;
+                    }
+            }
+        }
+        return jobs;
     }
 
     /**
